@@ -1,4 +1,4 @@
-package connection
+package mondel
 
 import (
 	"context"
