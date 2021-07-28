@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.27.1-devel
 // 	protoc        v3.17.3
-// source: GeneraReward.proto
+// source: generaReward.proto
 
 package response
 

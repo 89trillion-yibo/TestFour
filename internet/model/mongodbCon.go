@@ -1,14 +1,18 @@
-package mondel
+package model
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func MangodbConnection() *mongo.Client {
+var Conn *mongo.Collection
+var Session  mongo.Session
+
+func MangodbConnection()  {
 	// 设置客户端连接配置
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 
@@ -17,5 +21,13 @@ func MangodbConnection() *mongo.Client {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return client
+	//连接数据库
+	database := client.Database("user")
+	Conn = database.Collection("user")
+	//开启事务
+	session, err := client.StartSession()
+	if err != nil {
+		fmt.Println(err)
+	}
+	Session = session
 }

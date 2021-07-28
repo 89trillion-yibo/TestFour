@@ -1,27 +1,24 @@
 package main
 
 import (
-	service2 "awesomeProject/Testfourth/internet/handler"
+	"awesomeProject/Testfourth/internet/handler"
 	"awesomeProject/Testfourth/response"
-	"encoding/json"
 	"fmt"
+	"github.com/golang/protobuf/proto"
 	"testing"
 )
 
 func TestIncrease(t *testing.T)  {
 	var exp string
 	exp = "15"
-	user := service2.JudgmentUser(exp)
-	fmt.Println(user)
+	user, isBool, errmessage := handler.JudgmentUser(exp)
+	fmt.Println(user,isBool,errmessage)
 }
 
 func TestInfunc(t *testing.T) {
-	tmp := make(map[string]int)
-	tmp["Gold"] = 1000
-	tmp["Diamond"] = 100
-	marshal, _ := json.Marshal(tmp)
-	increase := service2.Increase("17", marshal)
+	increase, errmessage := handler.Increase("1", "V5UF7NR9")
 	newStu := response.GeneralReward{}
-	json.Unmarshal(increase,&newStu)
+	proto.Unmarshal(increase,&newStu)
 	fmt.Println(newStu)
+	fmt.Println(errmessage)
 }
